@@ -8,13 +8,18 @@ const userSchema = new mongoose.Schema({
     dob: Date,
     role: {
       type: String,
-      enum: ["STUDENT", "FACULTY", "ADMIN", "USER"],
-      default: "USER",
+      enum: ["STUDENT", "FACULTY"],
+      default: "STUDENT",
     },
     loginId: String,
     section: String,
     lastActivity: Date,
     totalActivity: String,
+    quizzesTaken: [{quiz:{ref: "QuizModel",type:mongoose.Schema.Types.ObjectId},
+      answers: [String],
+      score: {type:Number, default:0},
+      numberOfAttempts: {type: Number, default: 0}  
+    }]
   },
   { collection: "users" }
 );
