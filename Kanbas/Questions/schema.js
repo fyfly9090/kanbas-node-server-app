@@ -6,8 +6,10 @@ const questionSchema = new mongoose.Schema ({
         enum:["MultipleChoices", "FillInBlanks", "TrueFalse"],
         default:"MultipleChoices"
    },
-  points: String,
+  points: {type:String, default:"0"},
   answers:[],
 
-},{collection:"questions"})
+},
+
+{collection:"questions"})
 export default questionSchema;

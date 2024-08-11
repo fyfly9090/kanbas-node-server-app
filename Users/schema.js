@@ -15,11 +15,7 @@ const userSchema = new mongoose.Schema({
     section: String,
     lastActivity: Date,
     totalActivity: String,
-    quizzesTaken: [{quiz:{ref: "QuizModel",type:mongoose.Schema.Types.ObjectId},
-      answers: [String],
-      score: {type:Number, default:0},
-      numberOfAttempts: {type: Number, default: 0}  
-    }]
+    quizzesTaken: []
   },
   { collection: "users" }
 );

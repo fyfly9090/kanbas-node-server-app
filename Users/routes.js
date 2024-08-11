@@ -1,5 +1,5 @@
 import * as dao from "./dao.js";
-/* let currentUser = null; */
+
 export default function UserRoutes(app) {
   
   const createUser = async (req, res) => {
@@ -74,6 +74,8 @@ export default function UserRoutes(app) {
       res.sendStatus(401);
       return;
     }
+   /* const user = await dao.findUserById(currentUser._id);  */
+
     res.json(currentUser);
   };
   app.post("/api/users", createUser);

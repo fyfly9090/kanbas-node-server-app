@@ -1,7 +1,8 @@
-import db from "../Database/index.js";
+
+import * as dao from "./dao.js"; 
 
 export default function QuestionRoutes(app) {
-    app.get("/api/quizzes/:qid/questions", (req, res) => {
+    /* app.get("/api/quizzes/:qid/questions", (req, res) => {
         const { qid } = req.params;
         const questions = db.questions.filter((qt)=>qt.quiz===qid);
         res.json(questions);
@@ -32,5 +33,40 @@ export default function QuestionRoutes(app) {
             ...req.body
         };
         res.sendStatus(204);
-    })
+    }) */
+    const findAllQuestions = async (req, res) => {
+        const { quiz } = req.query;
+        if (quiz) {
+            const questions = await dao.findQuestionsByQuiz(quiz);
+            res.json(questions);
+            return;
+        }
+        const questions = await dao.findAllQuestions();
+        res.json(questions);
+        return;
+    }   
+
+    const deleteQuestion = async (req, res) => {
+        const status = await dao.deleteQuestion(req.params.qtid);
+        res.json(status);
+    }
+
+    const updateQuestion = async (req, res) => {
+        const questionId = req.params.qtid;
+        const status = await dao.updateQuestion(questionId, req.body);
+        res.json(status); 
+    }
+
+    const createQuestion = async (req, res) => {
+        const question = await dao.createQuestion(req.body);
+        res.json(question);
+    }
+
+    app.get("/api/quizzes/:qid/questions", findAllQuestions);
+    app.delete("/api/questions/:qtid", deleteQuestion);
+    app.put("/api/questions/:qtid", updateQuestion);
+    app.post("/api/quizzes/:qid/questions", createQuestion);
+
+
+    
 }

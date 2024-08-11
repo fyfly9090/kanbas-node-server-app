@@ -23,7 +23,8 @@ const quizSchema = new mongoose.Schema ({
    points: {type: Number, default: 0},
    due: String,
    available: String,
-   publish: {type:Boolean, default: false}
+   publish: {type:Boolean, default: false},
+   noOfQuestions: {type:Number, default: 0}
 },
   {collection: "quizzes"}
 );
