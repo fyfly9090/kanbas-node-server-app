@@ -4,7 +4,7 @@ const quizzesTakenSchema = new mongoose.Schema({
     user: String,
     attempts: Number,
     score: Number,
-    answers:[],
+    answers:[String],
 }, 
  {collection: "quizzesTaken" }
 );
